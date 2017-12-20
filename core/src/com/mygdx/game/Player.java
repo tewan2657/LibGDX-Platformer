@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  *
@@ -22,8 +23,11 @@ public class Player {
     
     private float elapsed;
     
-    private Animation<Texture> run;
-    private Texture stand;
+    private Animation<TextureRegion> run;
+    private TextureRegion stand;
+    
+    private TextureAtlas atlas;
+    
     
     private float dx;
     private float dy;
@@ -36,13 +40,11 @@ public class Player {
         this.dy = 0;
         
         this.elapsed = 0;
-        this.stand = new Texture("raw/stand.png");
         
-        Texture[] runFrames = new Texture[6];
-        for(int i = 0; i < 6; i++){
-            runFrames[i] = new Texture("raw/run_" + i + ".png");
-        }
-        run = new Animation(1f/10f, runFrames);
+        this.atlas = new TextureAtlas("packed/player.atlas");
+        
+        this.stand = atlas.findRegion("stand");
+        run = new Animation(1f/10f, atlas.findRegions("run"));
     }
     
     public void update(float deltaTime){
