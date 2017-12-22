@@ -22,6 +22,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class Player {
     // player location variables
+
     private float x;
     private float y;
     // player movement variables
@@ -29,22 +30,17 @@ public class Player {
     private float dy;
     // facing left or not
     private boolean facingLeft;
-
     // the amount of time an animation has been running
     private float elapsed;
-
     // animation variables for moving
     private Animation<TextureRegion> run;
     private Animation<TextureRegion> runL;
-    
     // pictures when standing still
     private TextureRegion stand;
     private TextureRegion standL;
-
     // texture atlas that will help load in the images from the big image
     // this was created from running the texture packer (in Desktop Launcher)
     private TextureAtlas atlas;
-
     // the collision rectangle to help us fix collisions
     private Rectangle bounds;
 
@@ -92,6 +88,14 @@ public class Player {
         this.bounds = new Rectangle(x, y, stand.getRegionWidth(), stand.getRegionHeight());
     }
 
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
     public void update(float deltaTime) {
         // if I'm pressing right
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
@@ -134,7 +138,7 @@ public class Player {
                 if (this.x < block.x) {
                     // move the player to the left
                     this.x = this.x - width;
-                // on the right
+                    // on the right
                 } else {
                     // move the player to the right
                     this.x = this.x + width;
@@ -144,7 +148,7 @@ public class Player {
                 if (this.y < block.y) {
                     // move the player down
                     this.y = this.y - height;
-                // above it
+                    // above it
                 } else {
                     // move the player up
                     this.y = this.y + height;
@@ -165,17 +169,17 @@ public class Player {
             } else {
                 batch.draw(stand, x, y);
             }
-        // right animation
+            // right animation
         } else if (this.dx > 0) {
             batch.draw(run.getKeyFrame(elapsed, true), x, y);
-        // left animation
+            // left animation
         } else if (this.dx < 0) {
             batch.draw(runL.getKeyFrame(elapsed, true), x, y);
         }
     }
-    
+
     // get rid of heavy objects
-    public void dispose(){
+    public void dispose() {
         atlas.dispose();
     }
 }

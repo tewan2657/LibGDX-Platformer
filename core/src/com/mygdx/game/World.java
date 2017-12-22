@@ -5,6 +5,7 @@
  */
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
@@ -30,7 +31,8 @@ public class World {
         shape = new ShapeRenderer();
     }
     
-    public void render(){
+    public void render(OrthographicCamera camera){
+        shape.setProjectionMatrix(camera.combined);
         // shaperenderer works like the spritebatch
         // we tell it if we want it as an outline or filled shape
         shape.begin(ShapeRenderer.ShapeType.Filled);
